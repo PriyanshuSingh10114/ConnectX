@@ -1,112 +1,134 @@
-# ConnectX - Real-Time Chat Application
+<div align="center">
+  <img src="https://raw.githubusercontent.com/tandpfun/skill-icons/main/icons/React-Dark.svg" alt="React" width="45"/>
+  <img src="https://raw.githubusercontent.com/tandpfun/skill-icons/main/icons/NodeJS-Dark.svg" alt="Node.js" width="45"/>
+  <img src="https://raw.githubusercontent.com/tandpfun/skill-icons/main/icons/MongoDB.svg" alt="MongoDB" width="45"/>
+  <img src="https://raw.githubusercontent.com/tandpfun/skill-icons/main/icons/TailwindCSS-Dark.svg" alt="Tailwind" width="45"/>
+  
+  <h1 align="center">ConnectX</h1>
+  <p align="center">
+    <strong>A Production-Ready Real-Time Chat Application</strong>
+  </p>
+  
+  <p align="center">
+    <a href="#"><img src="https://img.shields.io/badge/React-18.x-blue?style=for-the-badge&logo=react" alt="React" /></a>
+    <a href="#"><img src="https://img.shields.io/badge/Vite-5.x-646CFF?style=for-the-badge&logo=vite&logoColor=white" alt="Vite" /></a>
+    <a href="#"><img src="https://img.shields.io/badge/Tailwind_CSS-v4-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white" alt="Tailwind CSS" /></a>
+    <br/>
+    <a href="#"><img src="https://img.shields.io/badge/Node.js-20.x-339933?style=for-the-badge&logo=nodedotjs&logoColor=white" alt="Node.js" /></a>
+    <a href="#"><img src="https://img.shields.io/badge/Express.js-4.x-000000?style=for-the-badge&logo=express&logoColor=white" alt="Express" /></a>
+    <a href="#"><img src="https://img.shields.io/badge/Socket.io-4.x-010101?style=for-the-badge&logo=socketdotio&logoColor=white" alt="Socket.io" /></a>
+    <a href="#"><img src="https://img.shields.io/badge/MongoDB-Atlas-47A248?style=for-the-badge&logo=mongodb&logoColor=white" alt="MongoDB" /></a>
+  </p>
+</div>
 
-A production-ready real-time chat application built with React, Node.js, Express, Socket.io, and MongoDB.
+## 📖 Overview
 
-## Features
-- **Real-Time Messaging**: Instant message broadcasting using Socket.io.
-- **Chat History**: Persistent storage of all messages in MongoDB.
-- **Typing Indicators**: See when others are typing in real-time.
-- **Online Presence**: Track and display the number of connected users.
-- **Responsive UI**: A modern, responsive design with Dark Mode support using Tailwind CSS.
-- **Clean Architecture**: Modular and maintainable backend structure.
+ConnectX is a robust, full-stack real-time chat application inspired by modern messaging platforms like WhatsApp and Telegram. It features instant message broadcasting, active presence tracking, typing indicators, and persistent chat history. Built with a clean architecture and scalable design principles, it serves as a showcase for production-level software engineering.
 
-## Tech Stack
-- **Frontend**: React (Vite), Tailwind CSS, Socket.io-client, React Query, DayJS, Lucide React.
-- **Backend**: Node.js, Express.js, Socket.io, MongoDB (Mongoose).
-- **Security & Optimization**: Helmet, CORS, Compression, express-validator.
+## ✨ Key Features
 
-## Project Structure
+- ⚡ **Real-Time Communication**: Instant, bi-directional event-based messaging powered by Socket.io.
+- 💾 **Persistent Chat History**: All messages are securely saved to MongoDB Atlas, ensuring no data is lost upon refresh.
+- 👀 **Live Presence**: Real-time tracking of online users and a dynamic active users count.
+- ✍️ **Typing Indicators**: Bouncing animation indicators show exactly who is currently typing.
+- 🎨 **Premium UI/UX**: Designed with Tailwind CSS v4, featuring a beautiful interface, dark mode support, and intelligent auto-scrolling.
+- 🛡️ **Production Grade Security**: Implements `helmet`, `cors`, `express-rate-limit`, and payload validation.
+
+## 🏗️ Architecture
+
+```mermaid
+graph LR
+    A[Client UI<br/>React + Tailwind] <-->|Socket.io<br/>Real-Time Events| B(Node.js Server<br/>Express.js)
+    A <-->|REST APIs<br/>React Query| B
+    B <-->|Mongoose ODM| C[(MongoDB Atlas)]
 ```
-ConnectX/
-├── backend/
-│   ├── src/
-│   │   ├── config/          # DB connection
-│   │   ├── controllers/     # Route logic
-│   │   ├── middlewares/     # Error handlers
-│   │   ├── models/          # Mongoose schemas
-│   │   ├── routes/          # Express routes
-│   │   ├── socket/          # Socket.io handlers
-│   │   └── validators/      # Input validation
-│   ├── app.js               # Express app setup
-│   └── server.js            # Server entry point
-├── frontend/
-│   ├── src/
-│   │   ├── api/             # Axios instance
-│   │   ├── components/      # Reusable UI elements
-│   │   ├── context/         # Auth state
-│   │   ├── hooks/           # Custom hooks (useChat, useSocket)
-│   │   ├── screens/         # Page components
-│   │   └── services/        # Socket service singleton
-│   ├── tailwind.config.js   # Tailwind setup
-│   └── vite.config.js       # Vite configuration
-├── postman_collection.json  # API Testing suite
-└── render.yaml              # Deployment configuration
-```
 
-## Setup Instructions
+### Folder Structure
+The application follows a clean separation of concerns:
+- **`backend/`**: Modular API routes, schemas, controllers, and dedicated socket event handlers.
+- **`frontend/`**: Vite-powered React app utilizing custom hooks (`useSocket`, `useChat`) and a centralized `AuthContext`.
+
+## 🚀 Getting Started
 
 ### Prerequisites
-- Node.js (v18+)
-- MongoDB (Local or Atlas URL)
+- [Node.js](https://nodejs.org/) (v18 or higher)
+- [MongoDB](https://www.mongodb.com/cloud/atlas) URI string or local instance
 
-### 1. MongoDB Setup
-Make sure MongoDB is running locally on `mongodb://localhost:27017` or have a MongoDB Atlas connection string ready.
+### 1. Backend Setup
 
-### 2. Backend Setup
 ```bash
 cd backend
 npm install
-# Rename .env.example to .env and configure your variables
+
+# Create environment configuration
 cp .env.example .env
-# Start the development server
-npm run dev
 ```
 
-### 3. Frontend Setup
-```bash
-cd frontend
-npm install
-# Configure environment variables if necessary (in frontend/.env)
-# Start the Vite development server
-npm run dev
-```
-
-## Environment Variables
-**Backend (`backend/.env`)**
+**Configure `backend/.env`:**
 ```env
 PORT=5000
-MONGODB_URI=mongodb://localhost:27017/chat_app
+MONGODB_URI=mongodb+srv://<user>:<password>@cluster0.mongodb.net/chat_app
 CLIENT_URL=http://localhost:5173
 NODE_ENV=development
 ```
 
-**Frontend (`frontend/.env`)**
+Start the backend development server:
+```bash
+npm run dev
+```
+
+### 2. Frontend Setup
+
+```bash
+cd frontend
+npm install
+
+# Create environment configuration
+cp .env.example .env
+```
+
+**Configure `frontend/.env`:**
 ```env
 VITE_API_URL=http://localhost:5000/api
 VITE_SOCKET_URL=http://localhost:5000
 ```
 
-## API Documentation
-See the included `postman_collection.json` to test the API endpoints.
+Start the frontend Vite server:
+```bash
+npm run dev
+```
+
+## 📡 API Reference
+
+A fully documented **Postman Collection** (`postman_collection.json`) is included in the root directory.
 
 ### REST Endpoints
-- `GET /api/health` - Check API and DB status.
-- `GET /api/messages?page=1&limit=50` - Get paginated chat history.
-- `POST /api/messages` - Send a new message (also broadcasted via Socket.io).
+| Method | Endpoint | Description |
+|---|---|---|
+| `GET` | `/api/health` | Service health, DB state, and uptime check |
+| `GET` | `/api/messages?page=1&limit=50` | Retrieve paginated message history |
+| `POST` | `/api/messages` | Create and store a new message |
 
-### Socket Events
-- **Client Emits**: `join`, `message:send`, `typing:start`, `typing:stop`
-- **Server Emits**: `message:new`, `user:online`, `user:offline`, `typing:start`, `typing:stop`, `error`
+### Socket.io Events
+| Event | Direction | Payload / Action |
+|---|---|---|
+| `join` | Client ➡️ Server | `{ username }` - Register user session |
+| `message:send` | Client ➡️ Server | `{ username, message }` - Send payload |
+| `message:new` | Server ➡️ Client | Broadcasts newly saved message object |
+| `typing:start` / `:stop` | Bi-directional | Broadcasts typing states |
+| `user:online` / `:offline` | Server ➡️ Client | Broadcasts active user roster |
 
-## Deployment Instructions (Render)
-1. Push this repository to GitHub.
-2. Go to [Render](https://render.com) and create a new **Web Service**.
-3. Connect your repository. Render will automatically detect the `render.yaml` file.
-4. Set the necessary environment variables (`MONGODB_URI`, `CLIENT_URL`) in the Render dashboard.
-5. For the frontend, deploy it as a **Static Site** on Render or Vercel using `npm run build` as the build command and `dist` as the publish directory.
+## 🌐 Deployment
 
-## Future Improvements
-- Token-based Authentication (JWT).
-- Private one-on-one messaging.
-- File and image uploads.
-- Message status (Delivered, Read).
+The backend is configured for easy deployment to platforms like **Render**, **Railway**, or **Heroku**. 
+A `render.yaml` infrastructure-as-code file is included.
+
+1. Push to your GitHub repository.
+2. Connect your repository to Render.
+3. Render automatically provisions the `web` service from `render.yaml`.
+4. Ensure you set your production `MONGODB_URI` and `CLIENT_URL` in the environment variables dashboard.
+5. Deploy the `frontend/` directory to Vercel, Netlify, or Render Static Sites.
+
+## 📜 License
+
+This project is licensed under the MIT License.
