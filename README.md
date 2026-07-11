@@ -25,6 +25,8 @@
 
 ConnectX is a robust, full-stack real-time chat application inspired by modern messaging platforms like WhatsApp and Telegram. It features instant message broadcasting, active presence tracking, typing indicators, and persistent chat history. Built with a clean architecture and scalable design principles, it serves as a showcase for production-level software engineering.
 
+> **Note**: This project was developed as a technical interview assignment by **Priyanshu Singh** to demonstrate proficiency in building production-ready, full-stack applications with modern web technologies.
+
 ## ✨ Key Features
 
 - ⚡ **Real-Time Communication**: Instant, bi-directional event-based messaging powered by Socket.io.
